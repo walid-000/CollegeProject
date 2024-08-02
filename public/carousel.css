@@ -7,19 +7,23 @@ body {
 .carousel {
     position: relative;
     width: 100%;
-    max-width: 800px; /* Reduced size */
+    /* height:400px; */
+    max-width: 800px; 
     margin: 50px auto; /* Add margin to push the carousel down */
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .carousel-container {
     display: flex;
     transition: transform 0.5s ease;
+    
 }
 
 .carousel-slide {
     min-width: 100%;
     box-sizing: border-box;
+   
 }
 
 .carousel-slide img {
@@ -45,4 +49,11 @@ body {
 
 .carousel-next {
     right: 10px;
+}
+
+.head{
+    position: absolute;
+    background-color: black;
+    height: 20px;
+    width : 100% ;
 }
