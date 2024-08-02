@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Optional: Automatic sliding
+    // i might remove this 
     setInterval(() => {
         showSlide(currentIndex + 1);
     }, 3000); // Change slide every 3 seconds
