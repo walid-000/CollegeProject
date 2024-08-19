@@ -8,7 +8,7 @@ body {
     position: relative;
     width: 100%;
     /* height:400px; */
-    max-width: 800px; 
+    max-width: 1000px; 
     margin: 50px auto; /* Add margin to push the carousel down */
     overflow: hidden;
     border-radius: 10px;
