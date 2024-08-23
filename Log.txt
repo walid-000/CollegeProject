@@ -1,8 +1,0 @@
-GET : /login-signUp :  2024-08-21T04:10:32.734Z 
-GET : /style.css :  2024-08-21T04:10:32.821Z 
-GET : /favicon.ico :  2024-08-21T04:10:35.755Z 
-GET : /product1 :  2024-08-21T04:11:00.608Z 
-GET : /product1 :  2024-08-21T04:12:18.345Z 
-GET : /login-signUp :  2024-08-21T04:30:58.106Z 
-GET : /style.css :  2024-08-21T04:30:58.118Z 
-GET : /favicon.ico :  2024-08-21T04:30:59.619Z 
