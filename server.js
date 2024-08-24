@@ -1,5 +1,5 @@
 const express = require("express");
-require('dotenv').config();
+// require('dotenv').config();
 const path = require("path");
 const mongoose = require("mongoose");
 const port = process.env.PORT || 3000;
@@ -10,7 +10,8 @@ app.use(express.static(path.join(__dirname, 'views')));
 const {LogRequestMiddleware} = require("./Middlewares/global")
 // const connectToMongoDb = require("./connection")
 const userRouter = require("./Routers/user")
-const { User } = require("./Models/User")
+// const { User } = require("./Models/User")
+const cookieParser = require("cookie-parser")
 
 mongoose.connect(mongodbURL)
   .then(()=> {console.log(`mongodb connected `)})
@@ -20,6 +21,7 @@ mongoose.connect(mongodbURL)
 
 app.use(LogRequestMiddleware("Log.txt"))
 app.use(express.json());
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
