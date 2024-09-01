@@ -1,6 +1,6 @@
 const { json } = require("express");
 // const cookieParser = require("cookie-parser");
-const {User}= require("./../Models/User");
+const {User}= require("./../models/User");
 const jwt = require("jsonwebtoken");
 
 
