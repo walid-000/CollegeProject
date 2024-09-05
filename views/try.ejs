@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    .card{
+        display: inline-block;
+      vertical-align: top;
+      margin-right: 15px;
+    }
+
+.scroll-container {
+            width: 100%;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            white-space: nowrap; /* Prevent line breaks */
+            border: 1px solid black; /* Optional: For better visibility */
+            padding: 10px; /* Optional: Add some padding */
+            margin-top: 40px;
+        }
+
+        .scroll-item {
+            display: inline-block; /* Make items line up horizontally */
+            width: 200px; /* Set width of each item */
+            height: 300px; /* Set height of each item */
+            margin: 10px; /* Space between items */
+            background-color: lightblue; /* Background color for visibility */
+            text-align: center; /* Center text horizontally */
+            line-height: 150px; /* Center text vertically */
+            border: 1px solid black;
+        }
+
+        .categories-boxes{
+            /* background-color: grey; */
+            display: flex;
+            justify-content: center;
+            width: 75vw;
+            height: auto ;
+            margin: auto;
+            margin-top: 35px;
+        }
+        .box1{
+            height: 80px;
+            background-color: rgb(190, 151, 151);
+            width: 20%;
+            margin: 20px;
+            color: rgb(59, 55, 55);
+            font-family: cursive;
+            text-align: center;
+            font-size: 40px;
+            border-radius: 10px;
+            padding-top: 15px;
+            box-shadow: 2px;
+            transition: background-color 0.3s ease;
+
+        }
+
+        .box1:hover{
+            background-color: coral;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .carousel-item img {
+            width: 100%; 
+            max-height: 400px; /* Set maximum height for images */
+            object-fit: cover; 
+            border-radius: 0.5rem; 
+        }
+        .carousel {
+            max-width: 900px; /* Set a maximum width for the carousel */
+            margin: auto; /* Center the carousel */
+            border-radius: 0.5rem; /* Add border radius to carousel container */
+            overflow: hidden; /* Ensure no overflow from rounded corners */
+        }
+        .carousel-indicators button {
+            background-color: rgba(0, 0, 0, 0.5); /* Customize indicator color */
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5); /* Customize control icons */
+        }
+        .head-my {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999; 
+        }
+        .content {
+            margin-top:40px; 
+        }
+    
+        .search-bar {
+            width: 250px; 
+            position: relative;
+        }
+        .search-button {
+            width: 50px; 
+            padding: 0.375rem 0.75rem; 
+        }
+        .suggestions {
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            position: absolute;
+            background: white;
+            width: 100%;
+            z-index: 1000;
+            top: 100%; /* Position it right below the search input */
+            left: 0; /* Align it with the left edge of the input */
+            margin-top: 5px; /* Space between the input and suggestions */
+        }
+        .suggestion-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .suggestion-item:hover {
+            background-color: #ddd;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+</head>
+<body>
+    <div class="head-my">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#" style="margin-right: 40px; margin-left: 20px;">
+                <img src="path/to/your/logo.png" alt="Logo" style="height: 40px;"> <!-- Adjust logo size as needed -->
+            </a>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar Items Container -->
+                <div class="d-flex align-items-center w-100">
+                    <div class="search-my" style="width: 70vw;">
+                        <form class="d-flex me-3 flex-grow-1 position-relative qwerty">
+                            <input id="search-input" class="form-control search-bar pe-5" type="search" placeholder="Search" aria-label="Search"  autocomplete="off">
+                            <button class="btn btn-outline-success search-button position-absolute top-0 end-0" type="submit">
+                                <i class="bi bi-search"></i> <!-- Search icon -->
+                            </button>
+                            <div id="suggestions" class="suggestions"></div>
+                        </form>
+                    </div>
+                    <!-- Cart Icon with Badge -->
+                    <ul class="navbar-nav me-3 mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-cart" style="font-size: 1.5rem;"></i> <!-- Cart icon -->
+                                <span class="badge bg-danger">0</span> <!-- Replace 3 with your cart item count variable -->
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Another Dropdown Menu -->
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </div>
+
+    <div class="content">
+        <!-- Carousel -->
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://via.placeholder.com/900x400" class="d-block w-100" alt="Slide 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>First slide label</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/900x400" class="d-block w-100" alt="Slide 2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Second slide label</h5>
+                        <p>Some representative placeholder content for the second slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/900x400" class="d-block w-100" alt="Slide 3">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Third slide label</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+                <div style="
+                background-color: grey;
+                width: 50vw;
+                text-align: center;
+                 margin: auto;
+                 margin-top: 40px;
+                 color: #771515;
+                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                 font-size: 30px;
+                
+                ">We Rents</div>
+        <div class="categories-boxes">
+            <div class="box1">Camera</div>
+            <div class="box1">Light</div>
+            <div class="box1">Tripod</div>
+            <div class="box1">Reel</div>
+
+        </div>
+        <div class="scroll-container">
+            <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            <!-- <div class="scroll-item">Item 1</div>
+            <div class="scroll-item">Item 2</div>
+            <div class="scroll-item">Item 3</div>
+            <div class="scroll-item">Item 4</div>
+            <div class="scroll-item">Item 5</div>
+            <div class="scroll-item">Item 6</div>
+            <div class="scroll-item">Item 7</div> -->
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        const products = ["Apple", "Banana", "Cherry", "Date", "Fig", "Grape", "Kiwi"];
+        const searchInput = document.getElementById('search-input');
+        const suggestionsDiv = document.getElementById('suggestions');
+
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value.toLowerCase();
+            suggestionsDiv.innerHTML = '';
+
+            if (query) {
+                const filteredProducts = products.filter(product =>
+                    product.toLowerCase().includes(query)
+                );
+
+                filteredProducts.forEach(product => {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.textContent = product;
+                    suggestionItem.classList.add('suggestion-item');
+                    suggestionItem.addEventListener('click', function() {
+                        searchInput.value = product;
+                        suggestionsDiv.innerHTML = '';
+                    });
+                    suggestionsDiv.appendChild(suggestionItem);
+                });
+            }
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!searchInput.contains(event.target) && !suggestionsDiv.contains(event.target)) {
+                suggestionsDiv.innerHTML = '';
+            }
+        });
+    </script>
+</body>
+</html>

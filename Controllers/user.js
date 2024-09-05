@@ -65,6 +65,10 @@ async function handleLoginUser(req , res){
     }
 }
 
+async function handleDeleteUser(req , res) {
+    await User.findByIdAndDelete()
+}
+
 module.exports = {
     handleCreateUser ,
     handleGetUserWithId ,

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete Example</title>
+    <style>
+        .autocomplete-suggestions {
+            border: 1px solid #ddd;
+            max-height: 150px;
+            overflow-y: auto;
+            position: absolute;
+            background: white;
+            z-index: 1000;
+            width: 100%;
+        }
+        .autocomplete-suggestion {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .autocomplete-suggestion:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="search" placeholder="Search products..." autocomplete="off">
+    <div id="suggestions" class="autocomplete-suggestions"></div>
+
+    <script>
+        // Example products array
+        const products = [
+            "Apple iPhone 13",
+            "Apple MacBook Pro",
+            "Samsung Galaxy S21",
+            "Sony WH-1000XM4",
+            "Dell XPS 13",
+            "Bose QuietComfort 35",
+            "Nintendo Switch",
+            "GoPro Hero 10",
+            "Canon EOS R5",
+            "Sony A7III" ,
+            "saima 1" ,
+            "saima 12" ,
+            "saima 123" ,
+            "saima 1234" ,
+        ];
+
+        const searchInput = document.getElementById('search');
+        const suggestionsContainer = document.getElementById('suggestions');
+
+        function handleInput() {
+            const query = searchInput.value.toLowerCase();
+            suggestionsContainer.innerHTML = '';
+
+            if (query.length > 0) {
+                const filteredProducts = products.filter(product => product.toLowerCase().includes(query));
+                filteredProducts.forEach(product => {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.textContent = product;
+                    suggestionItem.classList.add('autocomplete-suggestion');
+                    suggestionItem.addEventListener('click', () => {
+                        searchInput.value = product;
+                        suggestionsContainer.innerHTML = '';
+                    });
+                    suggestionsContainer.appendChild(suggestionItem);
+                });
+            }
+        }
+
+        searchInput.addEventListener('input', handleInput);
+
+        // Optional: Hide suggestions when clicking outside the input
+        document.addEventListener('click', (event) => {
+            if (!searchInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
+                suggestionsContainer.innerHTML = '';
+            }
+        });
+    </script>
+</body>
+</html>

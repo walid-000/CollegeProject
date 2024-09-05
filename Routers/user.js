@@ -5,7 +5,7 @@ const {handleCreateUser , handleGetUserWithId , handleLoginUser} = require("./..
 router.post('/' , handleCreateUser)
 router.post('/login' , handleLoginUser)
 router.get("/:id" , handleGetUserWithId)
-
+// router.delete("/" , )
 
 
 
