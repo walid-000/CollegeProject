@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar with Events</title>
+    <link rel="stylesheet" href="cal.css">
+    <style>
+        #calendar {
+    width: 300px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.day {
+    display: inline-block;
+    width: 40px;
+    height: 60px; /* Increased height to accommodate product info */
+    line-height: 20px;
+    text-align: center;
+    margin: 2px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.day:hover {
+    background-color: #f0f0f0;
+}
+
+.product-info {
+    font-size: 12px;
+    color: green;
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+}
+
+    </style>
+</head>
+<body>
+    <div id="calendar"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const calendarElement = document.getElementById('calendar');
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+    
+    // Example product availability
+    const productAvailability = {
+        "2024-08-15": 50,
+        "2024-08-22": 20,
+        "2024-08-30": 10,
+        "2024-08-20" :54 ,
+        "2024-08-10": 10,
+        "2024-08-28": 10,
+        "2024-08-25": 10,
+    };
+
+    function generateCalendar(year, month) {
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        const calendarDays = [];
+
+        // Add days of the week
+        calendarDays.push(`<div class="header">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>`);
+
+        // Add empty slots before the first day of the month
+        for (let i = 0; i < firstDay.getDay(); i++) {
+            calendarDays.push('<div class="day"></div>');
+        }
+
+        // Add days of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            const productCount = productAvailability[dateStr] || 0;
+            calendarDays.push(`<div class="day" data-date="${dateStr}">${day}<div class="product-info">${productCount} </div></div>`);
+        }
+
+        calendarElement.innerHTML = calendarDays.join('');
+    }
+
+    generateCalendar(currentYear, currentMonth);
+});
+	
+
+    </script>
+</body>
+</html>
