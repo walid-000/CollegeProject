@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
  app.use("/user" , userRouter);
- app.use("/product" , productRouter);
+//  app.use("/product" , productRouter);
 
 app.get("/login-signUp" , (req , res)=>{
     res.sendFile(path.join(__dirname, 'views', 'Signup.html'))
@@ -37,6 +37,12 @@ app.get("/login-signUp" , (req , res)=>{
 app.get("/home" , (req , res)=>{
   res.render("school")
 })
+
+app.get("/product/:id" , (req , res)=>{
+  res.render("ProductDetail");
+})
+
+
 
 
 app.listen(port , ()=>{

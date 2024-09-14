@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      
+      input[type="number"] {
+        -moz-appearance: textfield; 
+        -webkit-appearance: none; 
+        appearance: none; 
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    </style>
+</head>
+<body>
+    <div class="flex items-center space-x-2">
+        <button type="button" class="bg-blue-500 text-white rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2 hover:bg-blue-600" onclick="decrement()"  style="font-weight: bold;"  >
+          -
+        </button>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" class="rounded border border-gray-300 py-2 px-4 text-base text-center focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 w-20">
+        <button type="button" class="bg-blue-500 text-white rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2 hover:bg-blue-600" onclick="increment()"  style="font-weight: bold;" >
+          +
+        </button>
+    </div>
+      
+    <script>
+      function increment() {
+        const input = document.getElementById('quantity');
+        input.value = parseInt(input.value) + 1;
+      }
+    
+      function decrement() {
+        const input = document.getElementById('quantity');
+        if (parseInt(input.value) > 1) {
+          input.value = parseInt(input.value) - 1;
+        }
+      }
+    </script>
+</body>
+</html>
