@@ -15,6 +15,10 @@ const productSchema = new mongoose.Schema({
         type : String ,
     } ,
 
+    productDescription : {
+        type : String
+    } ,
+
     productType : {
         type : String ,
     } ,

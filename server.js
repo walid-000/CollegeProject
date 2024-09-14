@@ -11,14 +11,12 @@ const userRouter = require("./Routers/user")
 const productRouter = require("./Routers/product")
 
 
-
 const cookieParser = require("cookie-parser")
 
 mongoose.connect(mongodbURL)
   .then(()=> {console.log(`mongodb connected `)})
   .catch(err => console.log(`some error : ${err}`));
   
-
 
 app.use(LogRequestMiddleware("Log.txt"))
 app.use(express.json());
@@ -36,7 +34,9 @@ app.get("/login-signUp" , (req , res)=>{
     res.sendFile(path.join(__dirname, 'views', 'Signup.html'))
 })
 
-
+app.get("/home" , (req , res)=>{
+  res.render("school")
+})
 
 
 app.listen(port , ()=>{
