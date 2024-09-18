@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar with Events</title>
+    
+    <style>
+        #calendar {
+            width: 300px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .day {
+            display: inline-block;
+            width: 40px;
+            height: 60px;
+            line-height: 20px;
+            text-align: center;
+            margin: 2px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .day:hover {
+            background-color: #f0f0f0;
+        }
+
+        .product-info {
+            font-size: 12px;
+            color: green;
+            position: absolute;
+            bottom: 5px;
+            width: 100%;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam asperiores ea, cum a vel necessitatibus neque ullam tenetur nam illum quod rerum repudiandae nisi? Aliquam laboriosam qui commodi ullam temporibus, eum quis ea labore dignissimos ipsum delectus libero unde vitae eaque dolores officia totam. Deserunt iusto nisi deleniti cupiditate, saepe alias blanditiis laborum veniam, fugit totam beatae vitae? Repellat, fugiat itaque cum quidem, facilis nulla id deleniti, quos nam non vel impedit temporibus nisi aut minus unde quod beatae quibusdam accusamus reprehenderit? Exercitationem, quasi. Sed obcaecati aperiam ex sunt ab non, quod blanditiis ut quibusdam nobis similique nesciunt, autem iste.</p>
+
+
+
+
+    <button id="showCalendarBtn">Show Calendar</button>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita numquam quod nisi dolorum, odit repellendus velit laborum quae animi alias suscipit temporibus ut doloremque delectus nulla qui explicabo ratione dolore molestiae dignissimos quasi quas eligendi. Obcaecati magnam sequi quam. Voluptatum accusantium quae dicta, fuga, nam aspernatur corporis qui fugiat eos nesciunt accusamus, nulla assumenda dolorem porro quam omnis facilis impedit placeat mollitia explicabo. Enim, fugiat itaque nisi officia ex nihil alias cupiditate amet distinctio deleniti, ipsam velit repellat hic optio possimus dolores quis excepturi aliquam repellendus adipisci unde! Quidem, molestias enim nesciunt ex quis reiciendis dolor quae debitis. Culpa, ut facilis similique necessitatibus mollitia sapiente nemo in corrupti, ea nisi hic, blanditiis odio voluptatem laudantium optio doloribus. Officia molestias optio sed ratione, nam in doloribus iure quia ullam, exercitationem illum atque eligendi fugiat enim vitae aliquid totam perspiciatis quisquam incidunt maxime saepe? Mollitia repellendus laborum, tenetur eius ut doloremque fugiat expedita quisquam minus odit aspernatur debitis voluptates eum vitae, ex suscipit voluptate facere sapiente inventore, atque iste exercitationem unde harum. Voluptates totam sequi minima molestias! Facilis ipsa suscipit quas tenetur maxime incidunt adipisci deleniti. Minus ea blanditiis quia expedita maiores similique illum a repellat? Quo facere dolor esse et aperiam.</p>
+    <!-- Modal Structure -->
+
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique mollitia porro quidem asperiores id. Sit nemo hic reiciendis fugit commodi! Quia, ipsum repellendus voluptatum dolore recusandae nisi iste, cumque, rem dignissimos ullam fugit eos atque illo aliquam. Qui sapiente optio similique unde eveniet iste soluta iure consequuntur, sequi ducimus hic natus facere, possimus ea! Sequi rem tempore necessitatibus reprehenderit, vel voluptatem quas? Minus iusto fuga distinctio est non culpa corporis ab recusandae assumenda facere ex facilis, sapiente deleniti excepturi hic, quo ullam laudantium placeat nisi in fugiat sit impedit. Voluptas, eaque odio commodi non delectus tenetur obcaecati accusamus sequi suscipit eveniet laborum doloremque ratione esse totam modi voluptates impedit. A esse et unde cupiditate assumenda provident, quisquam, dignissimos, aperiam neque exercitationem at. Excepturi suscipit quibusdam qui unde earum aperiam, dicta vero dolore minima reprehenderit odio ducimus dolorum, laborum modi dolor necessitatibus sed perspiciatis quo. Sequi temporibus, minus quia nesciunt earum dicta error adipisci nihil quod porro, omnis maiores voluptatibus soluta voluptas, consequatur consectetur vero. Quibusdam, maxime nemo sequi hic eveniet blanditiis? Reprehenderit asperiores quae hic veritatis repellendus. Maiores debitis laboriosam aspernatur similique ipsa, sapiente dolore deleniti temporibus officiis corporis architecto vero ut quis eaque dolorum sint saepe minus? Magnam, voluptatibus qui sapiente eligendi doloremque odit optio dolorum! Quo numquam fugiat, quibusdam error eos voluptatum obcaecati aut eveniet in dolor magnam, nihil fuga molestiae porro tenetur nisi quam saepe aspernatur doloribus magni. Alias temporibus molestias quibusdam suscipit autem iure nisi similique voluptates, laboriosam dolore culpa vel, ad officiis itaque harum quia facilis architecto esse praesentium officia amet ut voluptatum consequuntur. Cum assumenda, nemo recusandae sapiente repellat tempora molestias quae provident fugit hic totam nam, suscipit velit, temporibus maiores? Quo at delectus pariatur, blanditiis aspernatur fuga aut, nihil velit odio alias ut iste officiis esse eveniet veniam sapiente exercitationem nostrum! Iusto cupiditate ut aspernatur cum vitae amet esse vero, tenetur doloremque sed fugiat impedit minus soluta harum adipisci eius dolorem nulla pariatur libero. Beatae quis, nulla quisquam numquam aut eos porro a non delectus odit dicta modi omnis quae minus laborum. Maiores unde molestias fuga tempora porro aliquam iure totam quibusdam harum. Veniam mollitia possimus ad perspiciatis quis itaque, incidunt voluptatum expedita voluptates distinctio ex provident nihil suscipit dignissimos deleniti dolore blanditiis numquam, cupiditate iusto sapiente sint voluptate fugit eius! Nisi expedita officiis saepe impedit, nemo ipsa praesentium neque aperiam non. Nesciunt, voluptas sequi veritatis ad animi repellendus pariatur reprehenderit laboriosam ut corporis facere, suscipit accusamus eveniet eos neque earum tempora doloremque enim dicta accusantium repudiandae dolorum. At, explicabo? Commodi eligendi inventore nostrum iusto soluta id dolorem. Obcaecati ut hic tenetur sit tempore quidem, numquam iste debitis sunt, magnam inventore nobis asperiores aspernatur eos animi quas. Dolorem eum, officia veritatis nobis quibusdam excepturi libero nisi molestiae saepe velit laborum esse aspernatur distinctio in dolorum itaque voluptates asperiores quo cumque numquam. Expedita aut quia laboriosam rerum id velit ad eius consectetur voluptatibus, hic animi dignissimos. Quaerat nemo aspernatur nam labore natus molestiae provident, magnam soluta fuga voluptas repellendus velit repellat dicta, veniam laudantium ab delectus, iure error excepturi harum cumque modi fugit? Eos tenetur voluptate quam deleniti eveniet in numquam sapiente! Quae pariatur illo quidem doloribus. Labore impedit aspernatur modi ex dolores ullam nemo reiciendis officia, quo nihil quia numquam vero asperiores similique! Praesentium quod recusandae sunt odio ipsam voluptas voluptates cupiditate sint quia harum necessitatibus voluptatibus quidem iste, accusamus voluptate. Numquam vero ducimus necessitatibus aspernatur accusantium, porro rerum amet voluptates totam consequuntur iusto eligendi nisi ex animi ratione dolores sit quae rem. Pariatur sapiente, molestias aperiam quaerat saepe expedita explicabo. Inventore magnam beatae architecto omnis amet eius rerum, ab qui? Ipsum, provident! Libero amet harum incidunt quidem recusandae minima cum, aspernatur, blanditiis alias quis assumenda reprehenderit! Sapiente magni voluptas nihil qui ipsum, exercitationem, odit fugiat et esse quasi quo, quam ad accusamus illo doloremque eum ea soluta quae suscipit libero vero eius temporibus? Ratione possimus nisi amet eligendi quae. A consectetur repellat vel voluptate iste quidem vitae suscipit quia laborum excepturi deleniti soluta tempore aut, corporis adipisci. Inventore ipsum consequuntur voluptate officia voluptatem est dolores velit distinctio soluta aspernatur aliquam corrupti quia eveniet quas rerum deleniti illum porro placeat veritatis nobis, praesentium cumque ipsam! Vel deleniti consequuntur molestiae quas aperiam placeat aspernatur veritatis aliquam inventore similique quidem blanditiis rerum reiciendis sequi, a officiis illum itaque. Esse, quidem. Perspiciatis laborum sint atque quidem tempora! Autem earum reiciendis minima reprehenderit debitis sapiente nam officiis tempore! Error commodi cum quasi quo sapiente ad ullam ut, natus dolorum nulla officiis consequuntur saepe eligendi est consequatur adipisci! Labore quam sapiente veniam magnam nulla possimus esse inventore qui cum porro, provident molestias dicta nisi autem eaque voluptates accusamus perferendis illo earum officia voluptas quod minima? Corporis iste, libero aperiam repellat deleniti deserunt placeat tempore numquam doloribus atque blanditiis iure repellendus veritatis corrupti pariatur, perferendis minus. Suscipit neque amet molestias iure tenetur, nisi ipsum dignissimos mollitia eos possimus autem itaque nam ab sunt quisquam maxime quod voluptatum explicabo modi incidunt dolorem cum unde beatae! Porro molestias dignissimos eligendi, facere, quisquam adipisci tempora consequatur incidunt accusantium aspernatur dolor. Voluptatem recusandae et esse ipsum reprehenderit qui asperiores! Dolores id blanditiis quia doloremque hic quibusdam fugiat. Perferendis tempora quidem totam tempore numquam cum porro voluptatum, sapiente quos deleniti voluptates debitis. Assumenda nemo inventore nisi ad nostrum maiores consequatur atque nihil ipsa natus libero dolore non, vero perspiciatis sit amet nobis commodi excepturi necessitatibus sed eum. Eos soluta fugiat quia dolor nostrum neque distinctio nihil harum animi error suscipit, quis optio nisi! Repellat maiores, dicta perferendis odit consequatur veritatis inventore ipsa doloribus magnam ut numquam qui fugiat fuga atque ipsam molestiae id saepe alias amet tempora distinctio quo suscipit vero. Natus reiciendis magni quo quae, est placeat! Iste quas iusto praesentium, voluptatibus error saepe fugiat exercitationem corporis sit nisi id dicta dolorum qui harum? Maxime debitis tempora perspiciatis quaerat dicta. Magnam ipsam laboriosam consequuntur quo, voluptatem facere! Voluptatem perferendis similique excepturi id totam doloribus nostrum corrupti non est quibusdam officiis voluptate ad, illo enim fugit a numquam et dicta. Officiis temporibus molestiae amet.</p>
+    <div id="calendarModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const calendarElement = document.getElementById('calendar');
+            const calendarModal = document.getElementById('calendarModal');
+            const closeModal = document.querySelector('.close');
+            const showCalendarBtn = document.getElementById('showCalendarBtn');
+            const currentDate = new Date();
+            const currentMonth = currentDate.getMonth();
+            const currentYear = currentDate.getFullYear();
+            
+            // Example product availability
+            const productAvailability = {
+                "2024-08-15": 50,
+                "2024-08-22": 20,
+                "2024-08-30": 10,
+                "2024-08-20": 54,
+                "2024-08-10": 10,
+                "2024-08-28": 10,
+                "2024-08-25": 10,
+            };
+
+            function generateCalendar(year, month) {
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
+                const daysInMonth = lastDay.getDate();
+                const calendarDays = [];
+
+                // Add days of the week
+                calendarDays.push(`<div class="header">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>`);
+
+                // Add empty slots before the first day of the month
+                for (let i = 0; i < firstDay.getDay(); i++) {
+                    calendarDays.push('<div class="day"></div>');
+                }
+
+                // Add days of the month
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const productCount = productAvailability[dateStr] || 0;
+                    calendarDays.push(`<div class="day" data-date="${dateStr}">${day}<div class="product-info">${productCount}</div></div>`);
+                }
+
+                calendarElement.innerHTML = calendarDays.join('');
+            }
+
+            showCalendarBtn.addEventListener('click', () => {
+                calendarModal.style.display = 'block';
+                generateCalendar(currentYear, currentMonth);
+            });
+
+            closeModal.addEventListener('click', () => {
+                calendarModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === calendarModal) {
+                    calendarModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

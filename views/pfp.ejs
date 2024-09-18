@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Profile Page</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.profile-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.username {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.name {
+    margin: 5px 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.bio {
+    margin: 10px 0;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.website {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+.buttons {
+    margin: 10px 0;
+}
+
+.edit-profile, .follow-message {
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.edit-profile:hover, .follow-message:hover {
+    background-color: #007bb5;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #666;
+}
+
+</style>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+            <div class="profile-info">
+                <h2 class="username">@username</h2>
+                <h3 class="name">User Name</h3>
+                <p class="bio">Adventure seeker 🌍 | Coffee lover ☕ | Digital nomad 💻</p>
+                <a href="#" class="website">www.example.com</a>
+                <div class="buttons">
+                    <button class="edit-profile">Edit Profile</button>
+                    <button class="follow-message">Follow</button>
+                </div>
+                <div class="stats">
+                    <span>Posts: 120</span>
+                    <span>Followers: 1,234</span>
+                    <span>Following: 345</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
