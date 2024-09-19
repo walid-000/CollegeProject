@@ -66,7 +66,15 @@ async function handleLoginUser(req , res){
 }
 
 async function handleUserLogOut(req , res) {
-    res.cookies?authToken ;
+  const authToken = res.cookies?.authToken ;
+  console.log(authToken)
+  if (authToken){
+    res.clearCookie("authToken");
+    res.send("clear")
+  }
+  else {
+    res.send("cookie does not exist")
+  }
 }
 
 async function handleDeleteUser(req , res) {
