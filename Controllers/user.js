@@ -65,6 +65,10 @@ async function handleLoginUser(req , res){
     }
 }
 
+async function handleUserLogOut(req , res) {
+    res.cookies?authToken ;
+}
+
 async function handleDeleteUser(req , res) {
     await User.findByIdAndDelete()
 }

@@ -35,7 +35,8 @@ app.get("/login-signUp" , (req , res)=>{
 })
 
 app.get("/home" , (req , res)=>{
-  res.render("school")
+  const data = {isLoggedIn : false , token : {username : "walid" , role : "user"}};
+  res.render("school" , data);
 })
 
 app.get("/product/:id" , (req , res)=>{
