@@ -2,7 +2,7 @@ const { json } = require("express");
 // const cookieParser = require("cookie-parser");
 const {User}= require("./../models/User");
 const jwt = require("jsonwebtoken");
-
+const { getToken ,} = require("./../Services/auth");
 
 async function handleCreateUser(req, res) {
     const { name, email, password } = req.body;
@@ -45,18 +45,13 @@ async function handleLoginUser(req , res){
        }
      
        if (user.pswd === password){
-        const username = user.name
-        const role = 'user'
-        const payload = {
-           username ,
-           role , };
-
-        const token = jwt.sign({username : user.name , role : "user"} , "thisIsMySecretKey" , {expiresIn : '1hr'});
+        const payload = {userName : user.name , userId : user._id , role : "user"};
+        const token = getToken(payload);
+        console.log(token)
         res.cookie("authToken" , token)
-
         
-       return  res.status(200).json(user);
-
+        return res.redirect("/home")
+        
        }
        res.status(401).json({message : "wrong password"});
     }
@@ -77,12 +72,15 @@ async function handleUserLogOut(req , res) {
   }
 }
 
-async function handleDeleteUser(req , res) {
-    await User.findByIdAndDelete()
+function handleLogOut(req , res){
+    console.log("loging out .. ")
+    res.clearCookie("authToken");
+    return res.redirect("/home");
 }
 
 module.exports = {
     handleCreateUser ,
     handleGetUserWithId ,
     handleLoginUser,
+    handleLogOut ,
 }

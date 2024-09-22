@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.1/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7fafc;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #3182ce;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            padding: 16px;
+            color: white;
+            text-align: center;
+        }
+        .card-footer button {
+            background-color: #2b6cb0;
+        }
+        .card-footer button:hover {
+            background-color: #2c5282;
+        }
+        .input-field {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: #edf2f7;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+            background-color: white;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen">
+    <div class="w-full max-w-lg card">
+        <div class="card-header">
+            <h2 class="text-2xl font-semibold">Add New Product</h2>
+        </div>
+        <form action="/api/admin/addProduct" method="POST" class="p-6 space-y-4">
+            <div class="mb-4">
+                <label for="productName" class="block text-sm font-medium text-gray-700">Product Name</label>
+                <input type="text" id="productName" name="productName" class="input-field w-full mt-1" required>
+            </div>
+            <div class="mb-4">
+                <label for="productBrand" class="block text-sm font-medium text-gray-700">Brand Name</label>
+                <input type="text" id="productBrand" name="productBrand" class="input-field w-full mt-1" required>
+            </div>
+            <div class="mb-4">
+                <label for="pricePerDay" class="block text-sm font-medium text-gray-700">Price/Day</label>
+                <input type="number" id="pricePerDay" name="pricePerDay" class="input-field w-full mt-1" required>
+            </div>
+            <div class="mb-4">
+                <label for="productType" class="block text-sm font-medium text-gray-700">Product Type</label>
+                <input type="text" id="productType" name="productType" class="input-field w-full mt-1" required>
+            </div>
+            <div class="mb-4">
+                <label for="totalPiece" class="block text-sm font-medium text-gray-700">Total Quantity</label>
+                <input type="number" id="totalPiece" name="totalPiece" class="input-field w-full mt-1" required>
+            </div>
+            <div class="mb-4">
+                <label for="productDescription" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea id="productDescription" name="productDescription" class="input-field w-full mt-1" rows="3" required></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="productImage" class="block text-sm font-medium text-gray-700">Image Link</label>
+                <input type="url" id="productImage" name="productImage" class="input-field w-full mt-1" required>
+            </div>
+            <!-- ReservedDates is excluded here since admin won't add them at creation -->
+            <div class="card-footer text-center mt-6">
+                <button type="submit" class="text-white px-6 py-2 rounded-lg shadow-md focus:outline-none">Add Product</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

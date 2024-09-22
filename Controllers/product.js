@@ -2,6 +2,7 @@ const {Product} = require("./../models/products");
 const {json} = require("express")
 
 async function handleAddProduct(req , res) {
+    const pricePerDay1 =  null ;
     const {pricePerDay , productName , productBrand  , productImage , productType , totalPiece } = req.body ;
     const newProduct = await Product.create({pricePerDay , productName , productBrand  , productImage , productType , totalPiece });
     console.log("product created " , newProduct);
