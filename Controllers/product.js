@@ -2,8 +2,9 @@ const {Product} = require("./../models/products");
 const {json} = require("express")
 
 async function handleAddProduct(req , res) {
-    const pricePerDay1 =  null ;
-    const {pricePerDay , productName , productBrand  , productImage , productType , totalPiece } = req.body ;
+    const { pricePerDay }=  parseInt(req.body.pricePerDay) ;
+    const {  totalPiece }=  parseInt(req.body. totalPiece) ;
+    const { productName , productBrand  , productImage , productType  } = req.body ;
     const newProduct = await Product.create({pricePerDay , productName , productBrand  , productImage , productType , totalPiece });
     console.log("product created " , newProduct);
     res.status(201).json({ message: "Product created successfully", product: newProduct });

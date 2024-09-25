@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    input[type="number"] {
+      -moz-appearance: textfield; 
+      -webkit-appearance: none; 
+      appearance: none; 
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    /* Styling for the date inputs */
+    input[type="date"] {
+      padding: 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #4a5568;
+    }
+    input[type="date"]:focus {
+      outline: none;
+      border-color: #3182ce;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <section class="text-gray-600 body-font overflow-hidden">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap">
+        <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400">
+        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+          <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
+          <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">PRODUCT NAME</h1>
+          <div class="flex mb-4">
+            <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2">
+              <a class="text-gray-500" aria-label="Share on Facebook">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                </svg>
+              </a>
+              <a class="text-gray-500" aria-label="Share on Twitter">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                  <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                </svg>
+              </a>
+            </span>
+          </div>
+          
+          <div class="flex ml-6 items-center">
+            <span class="mr-3">Quantity</span>
+            <div class="relative">
+              <div class="flex items-center space-x-2">
+                <button type="button" class="bg-blue-500 text-white rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2 hover:bg-blue-600" onclick="decrement()" style="font-weight: bold;">
+                  -
+                </button>
+                <input type="number" id="quantity" max="10" name="quantity" min="1" value="1" class="rounded border border-gray-300 py-2 px-4 text-base text-center focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 w-20" aria-label="Quantity">
+                <button type="button" class="bg-blue-500 text-white rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2 hover:bg-blue-600" onclick="increment()" style="font-weight: bold;">
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Start and End Date Inputs -->
+          <div class="mt-4">
+            <label for="startDate" class="block text-gray-700 font-medium">Start Date:</label>
+            <input type="date" id="startDate" class="w-full mt-2">
+          </div>
+
+          <div class="mt-4">
+            <label for="endDate" class="block text-gray-700 font-medium">End Date:</label>
+            <input type="date" id="endDate" class="w-full mt-2">
+          </div>
+
+          <div class="flex mt-4">
+            <span class="title-font font-medium text-2xl text-gray-900">Price</span>
+            <button onclick="addToCart()" class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Add to Cart</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function increment() {
+      let max = 10; 
+      const input = document.getElementById('quantity');
+      if (input.value < max){
+        input.value = Math.max(1, parseInt(input.value) + 1);
+      }
+    }
+
+    function decrement() {
+      const input = document.getElementById('quantity');
+      input.value = Math.max(1, parseInt(input.value) - 1);
+    }
+
+    function addToCart(){
+      const quantity = document.getElementById('quantity').value;
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+
+      if (!startDate || !endDate) {
+        alert("Please select start and end dates");
+        return;
+      }
+
+      console.log("Quantity:", quantity, "Start Date:", startDate, "End Date:", endDate);
+    }
+  </script>
+</body>
+</html>

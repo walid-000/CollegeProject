@@ -47,7 +47,6 @@
           </div>
           <p class="leading-relaxed">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
           <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
-            
             <div class="flex ml-6 items-center">
               <span class="mr-3">Quantity</span>
               <div class="relative">
@@ -61,11 +60,21 @@
                   </button>
                 </div>
               </div>
+              <button onclick="" class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded" style="margin-left: 10px;">Availability</button>
             </div>
+          </div>
+          <div class="mt-4">
+            <label for="startDate" class="block text-gray-700 font-medium">Start Date:</label>
+            <input type="date" id="startDate" class="w-full mt-2">
+          </div>
+
+          <div class="mt-4">
+            <label for="endDate" class="block text-gray-700 font-medium">End Date:</label>
+            <input type="date" id="endDate" class="w-full mt-2">
           </div>
           <div class="flex">
             <span class="title-font font-medium text-2xl text-gray-900">Price</span>
-            <button class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Add to Cart</button>
+            <button onclick="bookNow()" class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Book Now</button>
           </div>
         </div>
       </div>
@@ -73,14 +82,50 @@
   </section>
   <script>
     function increment() {
+      let max   = 21; 
       const input = document.getElementById('quantity');
+  if (input.value < max){
       input.value = Math.max(1, parseInt(input.value) + 1);
+      }
     }
   
     function decrement() {
       const input = document.getElementById('quantity');
       input.value = Math.max(1, parseInt(input.value) - 1);
     }
+
+    function bookNow() {
+      const quantity = document.getElementById('quantity').value;
+      const startDate = new Date(document.getElementById('startDate').value);
+      const endDate = new Date(document.getElementById('endDate').value);
+      const today = new Date();
+      const lastDateOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+      if (isNaN(startDate) || isNaN(endDate)) {
+        alert('Please select both start and end dates.');
+        return;
+      }
+
+      if (startDate < today) {
+        alert('Start date cannot be earlier than today.');
+        return;
+      }
+
+      if (endDate < startDate) {
+        alert('End date cannot be earlier than start date.');
+        return;
+      }
+
+      if (endDate > lastDateOfMonth) {
+        alert('End date cannot be later than the last date of the current month.');
+        return;
+      }
+
+      // If all checks pass
+      console.log(`Quantity: ${quantity}, Start Date: ${startDate.toDateString()}, End Date: ${endDate.toDateString()}`);
+    }
+
+    
   </script>
 </body>
 </html>

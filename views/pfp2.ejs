@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cameraman Profile</title>
+    <style>
+        /* Reset some default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e8f0fe;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #3b82f6;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 32px;
+        }
+
+        .profile-section {
+            display: flex;
+            padding: 20px;
+        }
+
+        .profile-picture {
+            flex: 1;
+            text-align: center;
+        }
+
+        .profile-picture img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #3b82f6;
+        }
+
+        .profile-info {
+            flex: 2;
+            padding-left: 20px;
+        }
+
+        .profile-info h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .bio {
+            margin-top: 20px;
+            font-style: italic;
+            color: #777;
+        }
+
+        .details {
+            margin-top: 20px;
+        }
+
+        .details .label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .pricing {
+            margin-top: 20px;
+            background-color: #ebf2ff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .available-dates {
+            margin-top: 20px;
+        }
+
+        .available-dates ul {
+            padding-left: 20px;
+            list-style: disc;
+        }
+
+        .available-dates h3 {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .edit-dates-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3b82f6;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .edit-dates-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #e8f0fe;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Cameraman Profile</h1>
+    </div>
+
+    <div class="profile-section">
+        <div class="profile-picture">
+            <img src="<%= cameraman.profilePicture %>" alt="Profile Picture">
+        </div>
+        <div class="profile-info">
+            <h2><%= cameraman.fullName %></h2>
+            <p><strong>Address:</strong> <%= cameraman.address %></p>
+            <p><strong>Email:</strong> <%= cameraman.contactDetails.email %></p>
+            <p><strong>Phone:</strong> <%= cameraman.contactDetails.phone %></p>
+            <p class="bio"><%= cameraman.bio %></p>
+        </div>
+    </div>
+
+    <div class="details">
+        <div class="pricing">
+            Pricing per Day: ₹<%= cameraman.pricingPerDay %>
+        </div>
+
+        <div class="available-dates">
+            <h3>Available Dates:</h3>
+            <ul>
+                <% cameraman.availableDates.forEach(function(date) { %>
+                    <li><%= new Date(date).toLocaleDateString() %></li>
+                <% }); %>
+            </ul>
+
+            <!-- Conditional rendering for the Edit Dates button -->
+            <% if (isOwnProfile) { %>
+                <a href="/edit-dates/<%= cameraman._id %>" class="edit-dates-btn">Edit Dates</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Camera Rental Service</p>
+    </div>
+</div>
+
+</body>
+</html>
