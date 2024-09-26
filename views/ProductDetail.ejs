@@ -94,7 +94,7 @@
       input.value = Math.max(1, parseInt(input.value) - 1);
     }
 
-    function bookNow() {
+    function bookNow(bookings) {
       const quantity = document.getElementById('quantity').value;
       const startDate = new Date(document.getElementById('startDate').value);
       const endDate = new Date(document.getElementById('endDate').value);
@@ -121,8 +121,21 @@
         return;
       }
 
-      // If all checks pass
-      console.log(`Quantity: ${quantity}, Start Date: ${startDate.toDateString()}, End Date: ${endDate.toDateString()}`);
+      console.log(`Quantity: ${quantity}, Start Date: ${startDate.toDateString()}, End Date: ${endDate.toDateString()} `);
+
+      for (const dateString in bookings) {
+        const date = new Date(dateString);
+
+        // Check if the date is within the specified range
+        if (date >= start && date <= end) {
+            // Check if the maximum limit would be exceeded
+            if (max <= bookings[dateString] + newBooking) {
+                return false; // Booking cannot be made
+            }
+        }
+    }
+    alert("booking can be made ")
+     
     }
 
     

@@ -12,7 +12,6 @@ const productRouter = require("./Routers/product")
 const AdminRouter = require("./Routers/admin")
 
 
-app.use(LogRequestMiddleware("Log.txt"))
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'views')));
@@ -20,7 +19,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(checkAuth)
-
+app.use(LogRequestMiddleware("Log.txt"))
 
 
 
@@ -32,7 +31,7 @@ mongoose.connect(mongodbURL)
 
 
 app.use("/user" , userRouter);
-app.use("/product" , productRouter);
+// app.use("/product" , productRouter);
 app.use("/admin" , AdminRouter);
 
 app.get("/login-signUp" , (req , res)=>{
@@ -46,7 +45,7 @@ app.get("/home" , middlewareForHomePage , (req , res)=>{
 
 app.get("/product/:id" , (req , res)=>{
   res.render("ProductDetail");
-})
+});
 const dummyCameraman = {
   userId: "61a1234567890abcdef12345",
   fullName: "John Doe",
