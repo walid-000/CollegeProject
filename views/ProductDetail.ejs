@@ -22,10 +22,10 @@
   <section class="text-gray-600 body-font overflow-hidden">
     <div class="container px-5 py-24 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
-        <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400">
+        <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="<%= product.productImage %>">
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-          <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
-          <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">PRODUCT NAME</h1>
+          <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND : <%= product.productBrand %> </h2>
+          <h1 class="text-gray-900 text-3xl title-font font-medium mb-1"><%= product.productName %></h1>
           <div class="flex mb-4">
             <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2">
               <a class="text-gray-500" aria-label="Share on Facebook">
@@ -45,7 +45,7 @@
               </a>
             </span>
           </div>
-          <p class="leading-relaxed">Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
+          <p class="leading-relaxed">Description : <%= product.productDescription %>  <%= product.totalPiece %></p>
           <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
             <div class="flex ml-6 items-center">
               <span class="mr-3">Quantity</span>
@@ -73,7 +73,7 @@
             <input type="date" id="endDate" class="w-full mt-2">
           </div>
           <div class="flex">
-            <span class="title-font font-medium text-2xl text-gray-900">Price</span>
+            <span class="title-font font-medium text-2xl text-gray-900">Price/Day <%= product.pricePerDay%></span>
             <button onclick="bookNow()" class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Book Now</button>
           </div>
         </div>
@@ -94,7 +94,57 @@
       input.value = Math.max(1, parseInt(input.value) - 1);
     }
 
-    function bookNow(bookings) {
+    function canBookProducts(bookings, max, startDate, endDate, newBooking) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    for (const dateString in bookings) {
+        const date = new Date(dateString);
+
+        // Check if the date is within the specified range
+        if (date >= start && date <= end) {
+            // Check if the maximum limit would be exceeded
+            if (max <= bookings[dateString] + newBooking) {
+                return false; // Booking cannot be made
+            }
+        }
+    }
+    return true; 
+}
+
+async function makeReservation(productId, startDate, endDate, numToReserve) {
+    const url = '/reservations'; // Replace with your actual API URL
+
+    const body = {
+        productId: productId,
+        startDate: startDate,
+        endDate: endDate,
+        numToReserve: numToReserve
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.text(); // Use .json() if the response is in JSON format
+        console.log(data); // Handle success response
+    } catch (error) {
+        console.error('Error making reservation:', error);
+    }
+}
+
+
+
+    async function bookNow(bookings) {
       const quantity = document.getElementById('quantity').value;
       const startDate = new Date(document.getElementById('startDate').value);
       const endDate = new Date(document.getElementById('endDate').value);
@@ -123,18 +173,14 @@
 
       console.log(`Quantity: ${quantity}, Start Date: ${startDate.toDateString()}, End Date: ${endDate.toDateString()} `);
 
-      for (const dateString in bookings) {
-        const date = new Date(dateString);
-
-        // Check if the date is within the specified range
-        if (date >= start && date <= end) {
-            // Check if the maximum limit would be exceeded
-            if (max <= bookings[dateString] + newBooking) {
-                return false; // Booking cannot be made
-            }
-        }
-    }
-    alert("booking can be made ")
+      isBookingPosiible = canBookProducts(reserveDates , startDate.toISOString().split('T')[0] , endDate.startDate.toISOString().split('T')[0] , new_booking)
+      if (!isBookingPosiible){
+        alert("booking not possible ")
+        return ;
+      }
+       
+    // fetch request to do the post request 
+    await makeReservation(productId , startDate.toISOString().split('T')[0] ,  endDate.startDate.toISOString().split('T')[0]  , newBooking)
      
     }
 

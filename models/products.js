@@ -19,10 +19,7 @@ const productSchema = new mongoose.Schema({
         type : String
     } ,
 
-    productType : {
-        type : String ,
-    } ,
-
+   
     totalPiece : {
         type : Number ,
     } ,

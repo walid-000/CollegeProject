@@ -1,44 +1,20 @@
 const mongoose = require("mongoose");
 
 const cameramanSchema = new mongoose.Schema({
-    userId: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: "User", 
-    },
-    fullName: {
-        type: String,
-        
-    },
-    address: {
-        type: String,
-        
-    },
+    Name: { type: String, required: true },
+    address: { type: String, required: true },
     contactDetails: {
-        email: { type: String, },
-        phone: { type: String, }
+        email: { type: String, required: true, },
+        phone: { type: String, required: true }
     },
-    bio: {
-        type: String,
-        default: "No bio available"
-    },
-    pricingPerDay: {
-        type: Number,
-
-    },
-    availableDates: {
-        type: [Date],  // Array of available dates
-        default: []
-    },
-    profilePicture: {
-        type: String,  // URL or path to the profile picture
-        default: "https://via.placeholder.com/150"  // Default placeholder image
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+    password: { type: String, required: true },  
+    
+    bio: { type: String, default: "No bio available" },
+    pricingPerDay: { type: Number, required: true },
+    availableDates: { type: [Date], default: [] },
+    profilePicture: { type: String, default: "https://via.placeholder.com/150" },
+    createdAt: { type: Date, default: Date.now }
 });
 
 const Cameraman = mongoose.model("Cameraman", cameramanSchema);
-
 module.exports = Cameraman;

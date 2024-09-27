@@ -2,10 +2,10 @@ const {Product} = require("./../models/products");
 const {json} = require("express")
 
 async function handleAddProduct(req , res) {
-    const { pricePerDay }=  parseInt(req.body.pricePerDay) ;
-    const {  totalPiece }=  parseInt(req.body. totalPiece) ;
-    const { productName , productBrand  , productImage , productType  } = req.body ;
-    const newProduct = await Product.create({pricePerDay , productName , productBrand  , productImage , productType , totalPiece });
+    const  pricePerDay =  parseInt(req.body.pricePerDay) ;
+    const   totalPiece =  parseInt(req.body. totalPiece) ;
+    const { productName , productBrand  , productImage , productDescription } = req.body ;
+    const newProduct = await Product.create({pricePerDay , productName , productBrand  , productImage  , productDescription ,  totalPiece });
     console.log("product created " , newProduct);
     res.status(201).json({ message: "Product created successfully", product: newProduct });
 
@@ -49,11 +49,51 @@ async function handleGetProductByBrand(req , res) {
     res.status(200).json({message : "products found sucessfully" , product : product});
 }
 
+
+
+async function handleReservation(req , res) {
+    const {productId, startDate, endDate, numToReserve} = req.body ;
+    const product = await Product.findById(productId);
+    
+    if (!product) {
+        throw new Error("Product not found");
+    }
+
+    const reservedDates = product.reservedDates;
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    // Loop through all dates from startDate to endDate
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+        const formattedDate = d.toISOString().split('T')[0];  // Format date as 'YYYY-MM-DD'
+
+        // Check if the date already has bookings
+        if (reservedDates.has(formattedDate)) {
+            // If the date exists, increase the number of cameras reserved
+            reservedDates.set(formattedDate, reservedDates.get(formattedDate) + numToReserve);
+        } else {
+            // If the date doesn't exist, set the initial reservation
+            reservedDates.set(formattedDate, numToReserve);
+        }
+    }
+
+    // Save the updated product
+    await product.save();
+
+    res.send("reservation sucessfull ");
+}
+
+
+
+
+
+
 module.exports = {
     handleAddProduct ,
     handleDeleteProductById ,
     handleGetProductById ,
     handleGetProductByName ,
     handleGetProductByBrand ,
+    handleReservation ,
 }
 

@@ -10,6 +10,7 @@ const {middlewareForHomePage ,} = require("./Middlewares/User");
 const userRouter = require("./Routers/user")
 const productRouter = require("./Routers/product")
 const AdminRouter = require("./Routers/admin")
+const {middlewareForProductDetailPage} = require("./Middlewares/product")
 
 
 app.use(express.json());
@@ -20,7 +21,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(checkAuth)
 app.use(LogRequestMiddleware("Log.txt"))
-
+app.use('/uploads', express.static('uploads'));
 
 
 
@@ -43,8 +44,9 @@ app.get("/home" , middlewareForHomePage , (req , res)=>{
   res.render("school" , data);
 })
 
-app.get("/product/:id" , (req , res)=>{
-  res.render("ProductDetail");
+app.get("/product/:id" , middlewareForProductDetailPage , (req , res)=>{
+  const product = req.product ;
+  res.render("ProductDetail" , product);
 });
 const dummyCameraman = {
   userId: "61a1234567890abcdef12345",
