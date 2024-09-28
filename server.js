@@ -155,6 +155,6 @@ app.post('/reservations', async (req, res) => {
 
 app.listen(port , ()=>{
     console.log(`listening at port ${port} `);
-    console.log(`http://localhost:${port}`);
+    console.log(`http://localhost:${port}/home`);
     console.log(" ");
 })

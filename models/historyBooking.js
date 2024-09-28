@@ -9,7 +9,7 @@ const rentalHistorySchema = new mongoose.Schema({
     
     equipmentId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",  // Reference to Product (equipment) model
+        ref: "Product", 
     },
     quantity: {
         type: Number,
