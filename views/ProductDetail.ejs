@@ -81,39 +81,44 @@
     </div>
   </section>
   <script>
-    function increment() {
-      let max   = 21; 
-      const input = document.getElementById('quantity');
-  if (input.value < max){
-      input.value = Math.max(1, parseInt(input.value) + 1);
-      }
-    }
-  
-    function decrement() {
-      const input = document.getElementById('quantity');
-      input.value = Math.max(1, parseInt(input.value) - 1);
-    }
+  let productId = "<%= product._id %>";
+  let totalPiece = <%= product.totalPiece %>;
+  let reservedDates = <%- JSON.stringify(product.reservedDates) %>;
 
-    function canBookProducts(bookings, max, startDate, endDate, newBooking) {
+  // Function to increment the quantity, up to the totalPiece limit
+  function increment() {
+    const max = <%= product.totalPiece %>;
+    const input = document.getElementById('quantity');
+    if (input.value < max) {
+      input.value = Math.max(1, parseInt(input.value) + 1);
+    }
+  }
+
+  // Function to decrement the quantity, down to 1
+  function decrement() {
+    const input = document.getElementById('quantity');
+    input.value = Math.max(1, parseInt(input.value) - 1);
+  }
+
+  // Function to check if booking is possible based on availability
+  function canBookProducts(bookings, max, startDate, endDate, newBooking) {
     const start = new Date(startDate);
     const end = new Date(endDate);
 
     for (const dateString in bookings) {
-        const date = new Date(dateString);
-
-        // Check if the date is within the specified range
-        if (date >= start && date <= end) {
-            // Check if the maximum limit would be exceeded
-            if (max <= bookings[dateString] + newBooking) {
-                return false; // Booking cannot be made
-            }
+      const date = new Date(dateString);
+      if (date >= start && date <= end) {
+        if (max <= bookings[dateString] + newBooking) {
+          return false; // Booking exceeds available quantity
         }
+      }
     }
-    return true; 
-}
+    return true; // Booking can be made
+  }
 
-async function makeReservation(productId, startDate, endDate, numToReserve) {
-    const url = '/reservations'; // Replace with your actual API URL
+  // Function to make a reservation via an API call
+  async function makeReservation(productId, startDate, endDate, numToReserve) {
+    const url = '/reservations'; // Your API URL
 
     const body = {
         productId: productId,
@@ -135,55 +140,51 @@ async function makeReservation(productId, startDate, endDate, numToReserve) {
             throw new Error('Network response was not ok');
         }
 
-        const data = await response.text(); // Use .json() if the response is in JSON format
-        console.log(data); // Handle success response
+        const data = await response.text(); // Handle success response
+        console.log(data);
     } catch (error) {
         console.error('Error making reservation:', error);
     }
 }
+  // Main booking function to be called when "Book Now" button is clicked
+  async function bookNow() {
+    const quantity = parseInt(document.getElementById('quantity').value, 10);
+    const startDate = new Date(document.getElementById('startDate').value);
+    const endDate = new Date(document.getElementById('endDate').value);
+    const today = new Date();
 
-
-
-    async function bookNow(bookings) {
-      const quantity = document.getElementById('quantity').value;
-      const startDate = new Date(document.getElementById('startDate').value);
-      const endDate = new Date(document.getElementById('endDate').value);
-      const today = new Date();
-      const lastDateOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-
-      if (isNaN(startDate) || isNaN(endDate)) {
-        alert('Please select both start and end dates.');
-        return;
-      }
-
-      if (startDate < today) {
-        alert('Start date cannot be earlier than today.');
-        return;
-      }
-
-      if (endDate < startDate) {
-        alert('End date cannot be earlier than start date.');
-        return;
-      }
-
-      if (endDate > lastDateOfMonth) {
-        alert('End date cannot be later than the last date of the current month.');
-        return;
-      }
-
-      console.log(`Quantity: ${quantity}, Start Date: ${startDate.toDateString()}, End Date: ${endDate.toDateString()} `);
-
-      isBookingPosiible = canBookProducts(reserveDates , startDate.toISOString().split('T')[0] , endDate.startDate.toISOString().split('T')[0] , new_booking)
-      if (!isBookingPosiible){
-        alert("booking not possible ")
-        return ;
-      }
-       
-    // fetch request to do the post request 
-    await makeReservation(productId , startDate.toISOString().split('T')[0] ,  endDate.startDate.toISOString().split('T')[0]  , newBooking)
-     
+    // Validation: Check if dates are valid
+    if (isNaN(startDate) || isNaN(endDate)) {
+      alert('Please select both start and end dates.');
+      return;
     }
 
+    // Validation: Check if start date is today or in the future
+    if (startDate <= today) {
+      alert('Start date cannot be earlier than today.');
+      return;
+    }
+
+    // Validation: Check if end date is after start date
+    if (endDate < startDate) {
+      alert('End date cannot be earlier than start date.');
+      return;
+    }
+    let productId = "<%= product._id %>";
+  let totalPiece = <%= product.totalPiece %>;
+  let reservedDates = <%- JSON.stringify(product.reservedDates) %>;
+
+    // Check if booking can be made based on reservedDates and available quantity
+    if (!canBookProducts(reservedDates, totalPiece, startDate, endDate, quantity)) {
+      alert("Booking not possible for the selected dates and quantity.");
+      return;
+    }
+  alert("booking possible")
+    // Make the reservation
+    await makeReservation(productId, startDate.toISOString().split('T')[0], endDate.toISOString().split('T')[0], quantity);
+    console.log("total piece is " , totalPiece)
+    console.log("reservation is " , reservedDates)
+  }
     
   </script>
 </body>

@@ -11,6 +11,9 @@ async function handleAddProduct(req , res) {
 
 }
 
+
+
+
 async function handleDeleteProductById(req , res) {
     const productId = req.params.id ;
     const product = await Product.findByIdAndDelete(productId);
@@ -52,8 +55,10 @@ async function handleGetProductByBrand(req , res) {
 
 
 async function handleReservation(req , res) {
+    console.log("function called")
     const {productId, startDate, endDate, numToReserve} = req.body ;
     const product = await Product.findById(productId);
+    console.log(product)
     
     if (!product) {
         throw new Error("Product not found");
@@ -95,5 +100,6 @@ module.exports = {
     handleGetProductByName ,
     handleGetProductByBrand ,
     handleReservation ,
+    
 }
 

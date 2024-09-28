@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.1/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+       body {
+            background-color: #f0f8ff; /* Light blue background */
+            font-family: 'Inter', sans-serif;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-top: 50px; /* Adjusted margin for vertical centering */
+        }
+        .card-header {
+            background-color: #007bbd; /* Darker blue for header */
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 16px;
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .input-field {
+            border: 1px solid #cbd5e0; /* Light gray border */
+            padding: 12px;
+            border-radius: 5px;
+            background-color: #edf2f7; /* Light gray background */
+            transition: border-color 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #007bbd; /* Focus border color */
+            background-color: white; /* White background on focus */
+        }
+        button {
+            background-color: #007bbd; /* Darker blue button */
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background-color: #005f8d; /* Even darker blue on hover */
+            transform: translateY(-2px);
+        }
+        label {
+            color: #2d3748; /* Dark text color for labels */
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-lg card">
+        <div class="card-header">
+            Edit Product
+        </div>
+        <form action="/api/admin/editProduct" method="POST" class="p-6 space-y-4">
+            <div class="mb-4">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" name="productName" class="input-field" value="<%= product.productName %>" required>
+            </div>
+            <div class="mb-4">
+                <label for="productBrand">Brand Name</label>
+                <input type="text" id="productBrand" name="productBrand" class="input-field" value="<%= product.productBrand %>" required>
+            </div>
+            <div class="mb-4">
+                <label for="pricePerDay">Price/Day</label>
+                <input type="number" id="pricePerDay" name="pricePerDay" class="input-field" value="<%= product.pricePerDay %>" required>
+            </div>
+            <div class="mb-4">
+                <label for="productType">Product Type</label>
+                <select id="productType" name="productType" class="input-field" required>
+                    <option value="camera" <%= product.productType === 'camera' ? 'selected' : '' %>>Camera</option>
+                    <option value="light" <%= product.productType === 'light' ? 'selected' : '' %>>Light</option>
+                    <option value="stand" <%= product.productType === 'stand' ? 'selected' : '' %>>Stand</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="totalPiece">Total Quantity</label>
+                <input type="number" id="totalPiece" name="totalPiece" class="input-field" value="<%= product.totalPiece %>" required>
+            </div>
+            <div class="mb-4">
+                <label for="productDescription">Description</label>
+                <textarea id="productDescription" name="productDescription" class="input-field" rows="3" required><%= product.productDescription %></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="productImage">Image Link</label>
+                <input type="url" id="productImage" name="productImage" class="input-field" value="<%= product.productImage %>" required>
+            </div>
+            <div class="text-center mt-6">
+                <button type="submit">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

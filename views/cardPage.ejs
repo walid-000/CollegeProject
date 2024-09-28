@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <% products.forEach(product => { %>
+                    <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+                        <a class="block relative h-48 rounded overflow-hidden" data-product-id="<%= product._id %>">
+                            <img alt="<%= product.productName %>" class="object-cover object-center w-full h-full block" src="<%= product.productImage %>">
+                        </a>
+                        <div class="mt-4">
+                            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1"><%= product.productType %></h3>
+                            <h2 class="text-gray-900 title-font text-lg font-medium"><%= product.productName %></h2>
+                            <p class="mt-1 text-gray-700 font-semibold">$<%= product.pricePerDay %>.00 per day</p>
+                            <p class="text-gray-600">Available: <%= product.totalPiece %> pieces</p>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>

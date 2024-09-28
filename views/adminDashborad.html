@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Admin Dashboard</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Light blue background */
+    margin: 0;
+    padding: 20px;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    background-color: #add8e6; /* Light blue box */
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 1.5em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box:hover {
+    background-color: #87ceeb; /* Slightly darker blue on hover */
+    transform: scale(1.05);
+}
+
+</style>
+<body>
+    <h1 style="text-align: center;color: #228caf;">Admin Dashboard</h1>
+    <div class="dashboard" style="margin-top: 20vh;">
+        <a href="#add-product" class="box">Add Product</a>
+        <a href="#edit-product" class="box">Edit Product</a>
+        <a href="#delete-product" class="box">Delete Product</a>
+        <a href="#view-history" class="box">View Rental History</a>
+    </div>
+</body>
+</html>

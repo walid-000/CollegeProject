@@ -7,59 +7,59 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.1/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f0f4f8;
+            background-color: #f0f8ff; /* Light blue background */
             font-family: 'Inter', sans-serif;
         }
         .card {
             background-color: #ffffff;
-            border-radius: 12px;
+            border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-10px);
+            margin-top: 50px; /* Adjusted margin for vertical centering */
         }
         .card-header {
-            background-color: #4a90e2;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
+            background-color: #007bbd; /* Darker blue for header */
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
             padding: 16px;
             color: white;
             text-align: center;
             font-size: 1.5rem;
             font-weight: bold;
         }
-        .card-footer button {
-            background-color: #4a90e2;
-            padding: 12px 20px;
-            font-size: 1rem;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .card-footer button:hover {
-            background-color: #357ABD;
-            transform: translateY(-2px);
-        }
         .input-field {
-            border: 2px solid #e2e8f0;
+            border: 1px solid #cbd5e0; /* Light gray border */
             padding: 12px;
-            border-radius: 8px;
-            background-color: #edf2f7;
+            border-radius: 5px;
+            background-color: #edf2f7; /* Light gray background */
             transition: border-color 0.3s ease;
         }
         .input-field:focus {
             outline: none;
-            border-color: #4a90e2;
-            background-color: white;
+            border-color: #007bbd; /* Focus border color */
+            background-color: white; /* White background on focus */
+        }
+        button {
+            background-color: #007bbd; /* Darker blue button */
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background-color: #005f8d; /* Even darker blue on hover */
+            transform: translateY(-2px);
         }
         label {
-            color: #2d3748;
+            color: #2d3748; /* Dark text color for labels */
             font-weight: 500;
         }
     </style>
 </head>
-<body class="flex items-center justify-center h-screen">
-    <div class="w-full max-w-lg card" style="margin-top: 50vh;">
+<body class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-lg card">
         <div class="card-header">
             Add New Product
         </div>
@@ -78,7 +78,12 @@
             </div>
             <div class="mb-4">
                 <label for="productType" class="block text-sm font-medium">Product Type</label>
-                <input type="text" id="productType" name="productType" class="input-field w-full mt-1" placeholder="Enter product type" required>
+                <select id="productType" name="productType" class="input-field w-full mt-1" required>
+                    <option value="" disabled selected>Select product type</option>
+                    <option value="camera">Camera</option>
+                    <option value="light">Light</option>
+                    <option value="stand">Stand</option>
+                </select>
             </div>
             <div class="mb-4">
                 <label for="totalPiece" class="block text-sm font-medium">Total Quantity</label>
@@ -92,9 +97,8 @@
                 <label for="productImage" class="block text-sm font-medium">Image Link</label>
                 <input type="url" id="productImage" name="productImage" class="input-field w-full mt-1" placeholder="Enter product image URL" required>
             </div>
-            <!-- ReservedDates is excluded here since admin won't add them at creation -->
-            <div class="card-footer text-center mt-6">
-                <button type="submit" class="text-white px-6 py-3 rounded-lg shadow-md focus:outline-none hover:bg-blue-700 hover:shadow-lg">
+            <div class="text-center mt-6">
+                <button type="submit" class="w-full">
                     Add Product
                 </button>
             </div>

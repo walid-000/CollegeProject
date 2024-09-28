@@ -8,6 +8,9 @@ const productSchema = new mongoose.Schema({
         type : String ,
 
     }  ,
+    productType : {
+        type : String ,
+    } ,
     productBrand : {
         type : String ,
     } ,
